@@ -1,5 +1,5 @@
+import Todo from "@src/entities/Todo";
 import { Request, Response, Router } from "express";
-import Todo from "../db/migrations/entities/todo";
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.get("/todos", async (req: Request, res: Response) => {
     });
 });
 
-router.post("", async (req: Request, res: Response) => {
+router.post("/todos", async (req: Request, res: Response) => {
   const { name: taskName } = req.body;
 
   Todo.create({ name: taskName })
@@ -23,7 +23,7 @@ router.post("", async (req: Request, res: Response) => {
     });
 });
 
-router.put("/:id", async (req: Request, res: Response) => {
+router.put("/todos/:id", async (req: Request, res: Response) => {
   const { name: taskName, status } = req.body;
   const { id } = req.params;
 
@@ -33,7 +33,7 @@ router.put("/:id", async (req: Request, res: Response) => {
     )
     .catch((e) => {
       console.log("Error:", e);
-      res.sendStatus(500);
+      res.sendStatus(404);
     });
 });
 
